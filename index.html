@@ -3,39 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Shopping List</title>
-
+    <title>Car Posts Manager</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <div class="container">
-        <h1>Simple Shopping List</h1>
-
-        <div class="input-area">
-            <input 
-                type="text" 
-                id="itemInput" 
-                placeholder="Enter shopping item"
-            >
-
-            <button id="addButton">Add Item</button>
+        <h1>Car Posts Manager</h1>
+        
+        <div class="controls">
+            <div class="search-control">
+                <input type="text" id="searchInput" placeholder="Search cars by title...">
+                <button id="searchButton">Search</button>
+            </div>
+            
+            <div class="sort-control">
+                <label for="sortSelect">Sort by:</label>
+                <select id="sortSelect">
+                    <option value="id_asc">ID (Ascending)</option>
+                    <option value="id_desc">ID (Descending)</option>
+                    <option value="title_asc">Title (A-Z)</option>
+                    <option value="title_desc">Title (Z-A)</option>
+                </select>
+            </div>
+            
+            <button id="addPostButton" class="add-post-btn">Add Car</button>
         </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody id="shoppingList">
-                <!-- Item akan ditambahkan melalui JavaScript -->
-            </tbody>
-        </table>
+        
+        <div id="postsContainer" class="posts-container">
+            <div class="loading">Loading posts...</div>
+        </div>
+        
+        <div class="pagination">
+            <button id="prevButton" disabled>Previous</button>
+            <span id="pageInfo">Page 1</span>
+            <button id="nextButton" disabled>Next</button>
+        </div>
     </div>
-
-    <script src="script.js"></script>
+    
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Add New Car</h2>
+            <form id="addPostForm">
+                <div class="form-group">
+                    <label for="postTitle">Car Name:</label>
+                    <input type="text" id="postTitle" required>
+                    <span class="error" id="titleError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="postBody">Description:</label>
+                    <textarea id="postBody" required></textarea>
+                    <span class="error" id="bodyError"></span>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+            <div id="successMessage" class="success-message" style="display: none;">
+                <h3>Post Created Successfully!</h3>
+                <p><strong>ID:</strong> <span id="successId"></span></p>
+                <p><strong>Title:</strong> <span id="successTitle"></span></p>
+                <p><strong>Body:</strong> <span id="successBody"></span></p>
+                <button id="closeSuccessButton">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
 </body>
 </html>
